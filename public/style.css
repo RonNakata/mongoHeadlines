@@ -1,0 +1,47 @@
+*{
+    box-sizing: border-box;
+}
+  
+h1 {
+    font-size: 60px;
+}
+  
+h2, .title {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+a{
+    margin-bottom: 30px;
+    display: inline-block;
+}
+#scrapebutton{
+    display: inline-block;
+    margin-bottom: 30px;
+}
+.header{
+    text-align: center;
+}
+.content{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+    
+#articles{
+    width: 60%;
+    text-align: center;
+}
+  
+#notes{
+    width: 40%;
+    height: 50%;
+    text-align: center;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 20px;}
+
+#bodyinput{
+    width: 90%;
+    height: 60vh;
+}
