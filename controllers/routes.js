@@ -65,10 +65,13 @@ module.exports = function(router) {
                     .find("a")
                     .attr("href");
 
-                console.log(result.title, result.summary, result.link);
+                // console.log(result.title, result.summary, result.link);
 
                 // Create a new Article using the `result` object built from scraping
                 if (result.title && result.summary && result.link) {
+                    // NOTE: In the model I made title unique - to prevent duplicates
+                    // Not sure why the .catch is not handling this correctly and we get errors in the server console below
+                    // But it does not crash the server, does not add dupes, and the user doesnt see these errors
                     db.Article.create(result)
                         .then(function(dbArticle) {
                             // View the added result in the console
@@ -76,14 +79,17 @@ module.exports = function(router) {
                         })
                         .catch(function(err) {
                             // If an error occurred, send it to the client
-                            return res.json(err);
+                            // return res.json(err);
+                            console.log("dup entry : DENIED");
                         });
                 }
             });
+            
 
             // If we were able to successfully scrape and save an Article, send a message to the client
             res.send("Scrape Complete");
-        });
+        })
+
     });
 
     // Route for getting all Articles from the db

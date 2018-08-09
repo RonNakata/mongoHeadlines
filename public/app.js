@@ -1,52 +1,36 @@
 
 // Grab the articles as a json if there are already some stored in the mongodb
-$.getJSON("/articles", function(data) {
-  // For each one
-  for (var i = 0; i < data.length; i++) {
-    // Display the apropos information on the page
-    // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].summary + "<br />" + data[i].link + "</p>");
-    var $art = $('<div>').attr({
-      "data-id": data[i]._id,
-      "id": "art",
-    });
-    var $title = $('<span>').attr("class", "title").html(data[i].title + "<br />");
-    var $summary = $('<span>').html(data[i].summary+ "<br />");
-    var $link = $('<a>').attr({
-      "href": data[i].link,
-      "target": "_blank"
-    }).text("link");
-    $art.append($title, $summary, $link);
-    $("#articles").append($art);
-  }
-});
+function renderArt() {
+  $.getJSON("/articles", function(data) {
+    $("#articles").empty();
+    // For each one
+    for (var i = 0; i < data.length; i++) {
+      // Display the apropos information on the page
+      // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].summary + "<br />" + data[i].link + "</p>");
+      var $art = $('<div>').attr({
+        "data-id": data[i]._id,
+        "id": "art",
+      });
+      var $title = $('<span>').attr("class", "title").html(data[i].title + "<br />");
+      var $summary = $('<span>').html(data[i].summary + "<br />");
+      var $link = $('<a>').attr({
+        "href": data[i].link,
+        "target": "_blank"
+      }).text("link");
+      $art.append($title, $summary, $link);
+      $("#articles").append($art);
+    }
+  });
+}
 
+renderArt();
 
 // Whenever someone clicks the scrape button
 $(document).on("click", "#scrapebutton", function() {
 
   $.get("/scrape")
     .then(function(data) {
-      $("#articles").empty();
-
-      $.getJSON("/articles", function(data) {
-        // For each one
-        for (var i = 0; i < data.length; i++) {
-          // Display the apropos information on the page
-          // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].summary + "<br />" + data[i].link + "</p>");
-          var $art = $('<div>').attr({
-            "data-id": data[i]._id,
-            "id": "art",
-          });
-          var $title = $('<span>').attr("class", "title").html(data[i].title + "<br />");
-          var $summary = $('<span>').html(data[i].summary+ "<br />");
-          var $link = $('<a>').attr({
-            "href": data[i].link,
-            "target": "_blank"
-          }).text("link");
-          $art.append($title, $summary, $link);
-          $("#articles").append($art);
-        }
-      });
+      renderArt();
     });
 });
 

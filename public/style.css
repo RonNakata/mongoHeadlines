@@ -10,10 +10,16 @@ h2, .title {
     font-size: 25px;
     margin-bottom: 15px;
 }
-
+body{
+background-color: #F8ECC2;    
+}
 a{
     margin-bottom: 30px;
     display: inline-block;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
 }
 #scrapebutton{
     display: inline-block;
@@ -25,12 +31,19 @@ a{
 .content{
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
     
 #articles{
     width: 60%;
     text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+
+
 }
   
 #notes{
@@ -39,9 +52,16 @@ a{
     text-align: center;
     position: -webkit-sticky;
     position: sticky;
-    top: 20px;}
+    top: 20px;
+}
 
 #bodyinput{
     width: 90%;
     height: 60vh;
+}
+
+#art{
+    width: 30%;
+    /* display: inline-block; */
+    margin-right: 10px;
 }
